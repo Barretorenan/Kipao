@@ -1,6 +1,8 @@
-package com.example.echo;
+package com.example.kipao.model;
+
 
 import javax.persistence.*;
+
 @Entity
 @Table(name = "item")
 public class ItensModel {
@@ -16,8 +18,12 @@ public class ItensModel {
         @Column(name = "id_item")
         private Integer id;
 
-        @Column(name = "nome")
-        private String quote;
+    public String getNome() {
+        return nome;
+    }
+
+    @Column(name = "nome")
+        private String nome;
 
     }
 
