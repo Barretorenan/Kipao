@@ -1,42 +1,52 @@
 package com.example.kipao.controller;
 
-import com.example.kipao.model.ItemModel;
+import com.example.kipao.model.ItensModel;
+import com.example.kipao.model.Product;
 import com.example.kipao.repository.ItensRepository;
-import com.example.kipao.service.ProductService;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 public class ProductController {
     private final ItensRepository itensRepository;
-    private final ProductService productService;
 
-    public ProductController(ItensRepository itensRepository, ProductService productService) {
+    private List<Product> products = new ArrayList<>();
+
+    public ProductController(ItensRepository itensRepository) {
         this.itensRepository = itensRepository;
-        this.productService = productService;
     }
 
     @PostMapping("/adicionar-produto")
-    public ItemModel adicionarProduto(@RequestBody ItemModel itemModel) {
+    public String adicionarProduto(@RequestBody Product product) {
         // Lógica para adicionar um novo produto
-        return productService.criarProduto(itemModel);
+        products.add(product);
+        return "Produto adicionado com sucesso!";
     }
 
     @DeleteMapping("/remover-produto/{id}")
-    public ItemModel removerProduto(@PathVariable Integer id) {
+    public String removerProduto(@PathVariable int id) {
         // Lógica para remover um produto pelo ID
-        return productService.removerProduto(id);
+        if (id >= 0 && id < products.size()) {
+            products.remove(id);
+            return "Produto removido com sucesso!";
+        }
+        return "Produto não encontrado!";
     }
 
     @PutMapping("/atualizar-produto/{id}")
-    public ItemModel atualizarProduto(@PathVariable Integer id, @RequestBody ItemModel itemModel) {
+    public String atualizarProduto(@PathVariable int id, @RequestBody Product product) {
         // Lógica para atualizar um produto pelo ID
-        return productService.alterarProduto(id, itemModel);
+        if (id >= 0 && id < products.size()) {
+            products.set(id, product);
+            return "Produto atualizado com sucesso!";
+        }
+        return "Produto não encontrado!";
     }
 
     @GetMapping("/listar-produtos")
-    public List<ItemModel> listarProdutos() {
+    public List<ItensModel> listarProdutos() {
         // Retorna a lista de produtos
         return itensRepository.findAll();/**/
     }
