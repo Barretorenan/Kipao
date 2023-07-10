@@ -51,7 +51,7 @@ const Products = () => {
     };
 
     const handleDeleteProduct = (productId) => {
-        fetch(`/deletar-produto/${productId}`, {
+        fetch(`/remover-produto/${productId}`, {
             method: 'DELETE',
         })
             .then(response => response.json())
@@ -120,6 +120,14 @@ const Products = () => {
             </div>
 
             <Link to="/OrderSummary">Ir para o Carrinho</Link>
+
+            <style>
+                {`
+                .products-container {
+                    background: linear-gradient(to bottom, #87CEEB, #ADD8E6);
+                }
+                `}
+            </style>
         </div>
     );
 };

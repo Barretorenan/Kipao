@@ -2,14 +2,43 @@ import React, { useState } from 'react';
 
 const SubscriptionPage = () => {
     const [selectedPlan, setSelectedPlan] = useState('');
+    const [subscribed, setSubscribed] = useState(false);
 
     const handlePlanSelect = (plan) => {
         setSelectedPlan(plan);
     };
 
-    const handleSubscribe = () => {
-        // Lógica para enviar a solicitação de assinatura
-        console.log('Assinatura realizada:', selectedPlan);
+    const handleSubscribe = async () => {
+        try {
+            const response = await fetch('/assinar-plano/1', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    tipo: selectedPlan,
+                    quantidadeAssinada: getQuantidadeAssinada(selectedPlan),
+                    status: 'Ativa',
+                    horario: new Date().toISOString()
+                })
+            });
+            const data = await response.json();
+            console.log('Assinatura realizada:', data);
+            setSubscribed(true); // Define subscribed como true para exibir a mensagem de sucesso
+        } catch (error) {
+            console.error('Erro ao criar assinatura:', error);
+        }
+    };
+
+    const getQuantidadeAssinada = (plan) => {
+        if (plan === 'Plano 3 Itens') {
+            return 3;
+        } else if (plan === 'Plano 5 Itens') {
+            return 5;
+        } else if (plan === 'Plano 7 Itens') {
+            return 7;
+        }
+        return 0;
     };
 
     return (
@@ -34,6 +63,7 @@ const SubscriptionPage = () => {
             </div>
             <button onClick={handleSubscribe}>Assinar</button>
 
+            {subscribed && <p>Assinatura realizada com sucesso!</p>} {/* Exibe a mensagem de sucesso se subscribed for true */}
 
             <style>
                 {`

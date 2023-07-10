@@ -9,15 +9,43 @@ const CakeBuilder = () => {
     const [selectedRecheio, setSelectedRecheio] = useState('');
     const [selectedMassa, setSelectedMassa] = useState('');
     const [pedidoFeito, setPedidoFeito] = useState(false);
+    const [pedidoSucesso, setPedidoSucesso] = useState(false);
 
     const fazerPedido = () => {
-        // Aqui você pode adicionar a lógica para enviar o pedido com os elementos selecionados
-        // Por exemplo, enviar uma requisição POST para o backend com os dados do bolo
-        setPedidoFeito(true);
+        // Verificar se todos os campos foram selecionados
+        if (!selectedCobertura || !selectedRecheio || !selectedMassa) {
+            return;
+        }
+
+        // Criar objeto do bolo
+        const bolo = {
+            cobertura: selectedCobertura,
+            recheio: selectedRecheio,
+            massa: selectedMassa
+        };
+
+        // Enviar o pedido para o backend
+        fetch('/criar-bolo', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(bolo)
+        })
+            .then(response => {
+                if (response.ok) {
+                    setPedidoFeito(true);
+                    setPedidoSucesso(true);
+                } else {
+                    setPedidoFeito(true);
+                    setPedidoSucesso(false);
+                }
+            })
+            .catch(error => console.error(error));
     };
 
     return (
-        <div>
+        <div className="cake-builder-container">
             <h1>Monte seu Bolo</h1>
 
             <h2>Tipos de Cobertura:</h2>
@@ -57,10 +85,61 @@ const CakeBuilder = () => {
             <p>Massa selecionada: {selectedMassa}</p>
 
             <button onClick={fazerPedido} disabled={!selectedCobertura || !selectedRecheio || !selectedMassa}>
-                Fazer Pedido
+                Criar Bolo
             </button>
 
-            {pedidoFeito && <p>Pedido realizado com sucesso!</p>}
+            {pedidoFeito && (
+                <p className={`pedido-message ${pedidoSucesso ? 'success' : 'failure'}`}>
+                    {pedidoSucesso ? 'Bolo criado com sucesso!' : 'Erro ao criar bolo   .'}
+                </p>
+            )}
+
+            <style>
+                {`
+                .cake-builder-container {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                    height: 100vh;
+                    background: linear-gradient(to bottom, #87CEEB, #ADD8E6);
+                    color: #fff;
+                }
+
+                ul {
+                    list-style: none;
+                    padding: 0;
+                }
+
+                button {
+                    padding: 8px 16px;
+                    background-color: #fff;
+                    color: #000;
+                    border: none;
+                    border-radius: 5px;
+                    cursor: pointer;
+                    transition: background-color 0.3s;
+                }
+
+                button:hover {
+                    background-color: #F0F0F0;
+                }
+
+                .pedido-message {
+                    margin-top: 16px;
+                    padding: 8px 16px;
+                    border-radius: 5px;
+                }
+
+                .pedido-message.success {
+                    background-color: #00FF00;
+                }
+
+                .pedido-message.failure {
+                    background-color: #FF0000;
+                }
+                `}
+            </style>
         </div>
     );
 };

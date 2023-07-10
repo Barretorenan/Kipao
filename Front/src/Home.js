@@ -20,6 +20,9 @@ const Home = () => {
                 <li>
                     <Link to="/SubscriptionPage">Fazer plano de assinatura</Link>
                 </li>
+                <li>
+                    <Link to="/AddressManagement">Gerenciar endereço</Link>
+                </li>
             </ul>
 
             <style>

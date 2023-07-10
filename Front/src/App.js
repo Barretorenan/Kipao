@@ -11,6 +11,7 @@ import OrderHistory from './OrderHistory';
 import SingupScreen from './SingupScreen';
 import OrdersPage from "./OrderPage";
 import SubscriptionPage from "./SubscriptionPage";
+import AddressManagement from "./AddressManagement";
 
 const App = () => {
     return (
@@ -25,6 +26,7 @@ const App = () => {
                 <Route path="/OrderHistory" element={<OrderHistory/>} />
                 <Route path="/OrderSummary" element={<OrderSummary/>} />
                 <Route path="/SubscriptionPage" element={<SubscriptionPage/>} />
+                <Route path="/AddressManagement" element={<AddressManagement/>} />
             </Routes>
         </div>  );
 };
