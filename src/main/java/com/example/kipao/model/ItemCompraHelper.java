@@ -2,31 +2,17 @@ package com.example.kipao.model;
 
 import javax.persistence.*;
 
-@Entity
-@Table(name="itensPedido")
-public class ItemCompra {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_itensPedido")
+public class ItemCompraHelper {
     private int id;
 
-    @ManyToOne
-    @JoinColumn(name = "id_pedido")
-    private Pedido pedido;
+    private int pedido;
 
-    @ManyToOne
-    @JoinColumn(name = "id_item")
-    private ItemModel item;
+    private int item;
 
-    @ManyToOne
-    @JoinColumn(name = "id_bolo")
-    private Bolo bolo;
+    private int bolo;
 
-    @Column(name= "quantidade")
     private int qtd;
 
-    @Column(name= "valor")
     private double valor;
 
     public int getId() {
@@ -37,27 +23,27 @@ public class ItemCompra {
         this.id = id;
     }
 
-    public Pedido getPedido() {
+    public int getPedido() {
         return pedido;
     }
 
-    public void setPedido(Pedido pedido) {
+    public void setPedido(int pedido) {
         this.pedido = pedido;
     }
 
-    public ItemModel getItem() {
+    public int getItem() {
         return item;
     }
 
-    public void setItem(ItemModel item) {
+    public void setItem(int item) {
         this.item = item;
     }
 
-    public Bolo getBolo() {
+    public int getBolo() {
         return bolo;
     }
 
-    public void setBolo(Bolo bolo) {
+    public void setBolo(int bolo) {
         this.bolo = bolo;
     }
 
