@@ -1,7 +1,9 @@
 package com.example.kipao.controller;
 
 import com.example.kipao.model.Assinatura;
+import com.example.kipao.model.Pedido;
 import com.example.kipao.repository.AssinaturaRepository;
+import com.example.kipao.repository.PedidoRepository;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -9,8 +11,10 @@ import java.util.List;
 @RestController
 class AssinaturaController {
     private final AssinaturaRepository assinaturaRepository;
+    private final PedidoRepository pedidoRepository;
 
-    public AssinaturaController(AssinaturaRepository assinaturaRepository) {
+    public AssinaturaController(AssinaturaRepository assinaturaRepository, PedidoRepository pedidoRepository) {
+        this.pedidoRepository = pedidoRepository;
         this.assinaturaRepository = assinaturaRepository;
     }
 
@@ -24,8 +28,10 @@ class AssinaturaController {
      return  assinaturaRepository.findAllByPedido_ClienteId(id);
     }
 
-    @PostMapping("/assinar-plano")
-    public Assinatura assinarPlano(@RequestBody Assinatura assinatura) {
+    @PostMapping("/assinar-plano/{id}")
+    public Assinatura assinarPlano(@RequestBody Assinatura assinatura, @PathVariable int id) {
+        Pedido pedidorecuperado = pedidoRepository.findById(id).get();
+        assinatura.setPedido(pedidorecuperado);
         return assinaturaRepository.save(assinatura);
     }
 
