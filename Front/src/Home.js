@@ -1,5 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import ProductList from "./ProductList";
+import Product from './Products';
 
 const Home = () => {
     return (
@@ -8,7 +10,7 @@ const Home = () => {
             <p>O que você gostaria de fazer?</p>
             <ul>
                 <li>
-                    <Link to="/products">Ver produtos</Link>
+                    <Link to="/Products">Ver produtos</Link>
                 </li>
                 <li>
                     <Link to="/cake-builder">Montar bolo</Link>
