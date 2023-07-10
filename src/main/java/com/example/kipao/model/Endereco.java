@@ -13,11 +13,17 @@ public class Endereco {
 
     @Column(name = "logradouro")
     private String logradouro;
-
     @Column(name="numero")
     private String numero;
     @Column(name="bairro")
     private String bairro;
+
+    public String getCep() {
+        return cep;
+    }
+
+    @Column(name="cep")
+    private String cep;
 
     @ManyToOne
     @JoinColumn(name="idusuario")
