@@ -9,6 +9,7 @@ import UserForm from './UserForm';
 import Home from './Home';
 import Product from './Products';
 
+import SingupScreen from './SingupScreen';
 const App = () => {
     return (
         <div className="App">
@@ -16,7 +17,7 @@ const App = () => {
                 <Route path="/Home" element={<Home/>} />
                 <Route path="/" element={<LoginScreen/>} />
                 <Route path="/Products" element={<Product/>} />
-                <Route path="/" element={<LoginScreen/>} />
+                <Route path="/SingupScreen" element={<SingupScreen/>} />
                 <Route path="/" element={<LoginScreen/>} />
             </Routes>
         </div>  );
