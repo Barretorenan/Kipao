@@ -23,6 +23,15 @@ public class ProductController {
         return productService.criarProduto(itemModel);
     }
 
+    @PostMapping("/adicionar-produto/teste")
+    public ItemModel adicionarProduto() {
+        ItemModel itemModel = new ItemModel();
+        itemModel.setNome("teste do nome");
+        itemModel.setDescricao("teste da descricao");
+        itemModel.setCategoria("teste da categoria");
+        return productService.criarProduto(itemModel);
+    }
+
     @DeleteMapping("/remover-produto/{id}")
     public ItemModel removerProduto(@PathVariable Integer id) {
         // Lógica para remover um produto pelo ID
