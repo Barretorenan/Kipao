@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import {Router, useNavigate} from 'react-router-dom';
+import SignupScreen from "./SingupScreen";
+import { Link } from 'react-router-dom';
 
 const LoginScreen = () => {
     const history = useNavigate();
@@ -58,8 +60,47 @@ const LoginScreen = () => {
                 <button type="submit">Login</button>
             </form>
             {error && <p style={{ color: 'red' }}>{error}</p>}
+            <p>Não tem uma conta?
+                <Link to="/SingupScreen">Cadastre-se</Link></p>
+            <style>{`
+                .login-container {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                height: 100vh;
+                background: linear-gradient(to bottom, #87CEEB, #ADD8E6);
+                color: #fff;
+            }
+
+                form {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+                label {
+                margin-bottom: 8px;
+            }
+
+                input {
+                margin-bottom: 16px;
+            }
+
+                button {
+                margin-top: 16px;
+            }
+
+                p {
+                margin-top: 16px;
+                font-size: 14px;
+            }
+               `}
+            </style>
         </div>
+
     );
 };
 
 export default LoginScreen;
+

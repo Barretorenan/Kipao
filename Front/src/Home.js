@@ -1,24 +1,54 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import ProductList from "./ProductList";
-import Product from './Products';
+import OrderSummary from "./OrderSummary";
 
 const Home = () => {
     return (
-        <div>
-            <h1>Bem-vindo à nossa padaria!</h1>
+        <div className="home-container">
+            <h1>Bem-vindo à padaria Kipão!</h1>
             <p>O que você gostaria de fazer?</p>
             <ul>
                 <li>
                     <Link to="/Products">Ver produtos</Link>
                 </li>
                 <li>
-                    <Link to="/cake-builder">Montar bolo</Link>
+                    <Link to="/CakeBuilder">Montar bolo</Link>
                 </li>
                 <li>
-                    <Link to="/order-history">Histórico de pedidos</Link>
+                    <Link to="/OrderHistory">Histórico de pedidos</Link>
+                </li>
+                <li>
+                    <Link to="/SubscriptionPage">Fazer plano de assinatura</Link>
                 </li>
             </ul>
+
+            <style>
+                {`
+                .home-container {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                    height: 100vh;
+                    background: linear-gradient(to bottom, #87CEEB, #ADD8E6);
+                    color: #fff;
+                }
+
+                ul {
+                    list-style: none;
+                    padding: 0;
+                }
+
+                li {
+                    margin-bottom: 16px;
+                }
+
+                a {
+                    color: #fff;
+                    text-decoration: none;
+                }
+                `}
+            </style>
         </div>
     );
 };

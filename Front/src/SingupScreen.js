@@ -59,6 +59,38 @@ const SignupScreen = () => {
             </form>
             {successMessage && <p style={{ color: 'green' }}>{successMessage}</p>}
             {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
+
+            <style>
+                {`
+                .signup-container {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                    height: 100vh;
+                    background: linear-gradient(to bottom, #87CEEB, #ADD8E6);
+                    color: #fff;
+                }
+
+                form {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                }
+
+                label {
+                    margin-bottom: 8px;
+                }
+
+                input {
+                    margin-bottom: 16px;
+                }
+
+                button {
+                    margin-top: 16px;
+                }
+                `}
+            </style>
         </div>
     );
 };

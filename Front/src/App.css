@@ -36,11 +36,38 @@
     transform: rotate(360deg);
   }
 }
+
 .login-container {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
+  justify-content: center;
   height: 100vh;
-  background-color: blue;
+  background: linear-gradient(to bottom, #0000ff, #00008b);
+  color: #fff;
 }
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+label {
+  margin-bottom: 8px;
+}
+
+input {
+  margin-bottom: 16px;
+}
+
+button {
+  margin-top: 16px;
+}
+
+p {
+  margin-top: 16px;
+  font-size: 14px;
+}
+
 

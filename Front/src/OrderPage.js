@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 
 const Products = () => {
     const [products, setProducts] = useState([]);
@@ -50,23 +49,6 @@ const Products = () => {
         console.log('Produto adicionado ao carrinho:', product);
     };
 
-    const handleDeleteProduct = (productId) => {
-        fetch(`/deletar-produto/${productId}`, {
-            method: 'DELETE',
-        })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    // Remover o produto da lista
-                    const updatedProducts = products.filter(product => product.id !== productId);
-                    setProducts(updatedProducts);
-                } else {
-                    console.error(data.message);
-                }
-            })
-            .catch(error => console.error(error));
-    };
-
     return (
         <div className="products-container">
             <h1>Produtos</h1>
@@ -77,7 +59,6 @@ const Products = () => {
                         <p>{product.descricao}</p>
                         <p>{product.categoria}</p>
                         <button onClick={() => handleAddToCart(product)}>Adicionar ao Carrinho</button>
-                        <button onClick={() => handleDeleteProduct(product.id)}>Excluir</button>
                     </li>
                 ))}
             </ul>
@@ -119,7 +100,52 @@ const Products = () => {
                 </form>
             </div>
 
-            <Link to="/OrderSummary">Ir para o Carrinho</Link>
+            <style>
+                {`
+                .products-container {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                    height: 100vh;
+                    background: linear-gradient(to bottom, #87CEEB, #ADD8E6);
+                    color: #fff;
+                }
+
+                ul {
+                    list-style: none;
+                    padding: 0;
+                }
+
+                li {
+                    margin-bottom: 16px;
+                }
+
+                .create-product-section {
+                    background-color: blue;
+                    padding: 16px;
+                    margin-top: 32px;
+                }
+
+                form {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                }
+
+                label {
+                    margin-bottom: 8px;
+                }
+
+                input {
+                    margin-bottom: 16px;
+                }
+
+                button {
+                    margin-top: 16px;
+                }
+                `}
+            </style>
         </div>
     );
 };
