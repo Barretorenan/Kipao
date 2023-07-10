@@ -38,4 +38,9 @@ public class PessoaController {
 
         return pessoaRepository.save(pessoaRecuperada);
     }
+
+    @PostMapping("/criar-pessoa")
+    public Pessoa adicionarPessoa( @RequestBody Pessoa pessoa) {
+        return pessoaRepository.save(pessoa);
+    }
 }
